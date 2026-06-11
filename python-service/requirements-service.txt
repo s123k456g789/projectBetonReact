@@ -1,0 +1,6 @@
+# חבילות נוספות שצריך לשכבת השירות (מעבר ל-requirements.txt המקורי)
+# התקנה:  pip install -r requirements-service.txt
+
+requests==2.32.3      # שליחת בקשות HTTP ל-Google (Geocoding + Routes)
+Rtree==1.3.0          # אינדקס מרחבי R-Tree (דורש libspatialindex - ראה README_SERVICE_HE)
+twilio==9.3.0         # שליחת SMS (אופציונלי - רק אם משתמשים ב-Twilio)

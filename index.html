@@ -1,0 +1,30 @@
+<!doctype html>
+<!--
+  קובץ ה-HTML הראשי והיחיד של האפליקציה (Single Page Application).
+  כל ה-React "נשתל" לתוך ה-div עם id="root" שבהמשך.
+  dir="rtl" + lang="he" => כל האתר מיושר מימין לשמאל ובעברית.
+-->
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />                                          <!-- קידוד תווים: תומך בעברית -->
+    <link rel="icon" type="image/svg+xml" href="/beton.svg" />        <!-- אייקון הלשונית בדפדפן -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- רספונסיביות למובייל -->
+    <meta name="description" content="Beton - פלטפורמה לתיווך שאריות בטון בין קבלנים ללקוחות" />
+    <title>Beton · תיווך שאריות בטון</title>                          <!-- כותרת הלשונית -->
+
+    <!-- טעינת הפונט "Heebo" מ-Google Fonts: פונט עברי מודרני, נקי וקריא -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- כאן React מזריק את כל האפליקציה (ראה src/main.jsx) -->
+    <div id="root"></div>
+
+    <!-- נקודת הכניסה של הקוד. type="module" => תמיכה ב-import/export מודרני -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

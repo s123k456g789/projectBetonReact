@@ -1,0 +1,449 @@
+/* ============================================================================
+   מערכת העיצוב הגלובלית של האתר (Design System)
+   ----------------------------------------------------------------------------
+   כאן מרוכז כל ה"שפה הויזואלית" של האתר: צבעים, מרווחים, פינות מעוגלות, צללים
+   וטיפוגרפיה. שימוש במשתני CSS (--var) מאפשר לשנות את כל המראה ממקום אחד.
+
+   == הסבר על בחירת הצבעים (כפי שהתבקש) ==
+   הנושא של האתר הוא בטון ובנייה, ולצד זה - דחיפות (בטון מתקשה תוך שעות).
+   לכן בחרתי פלטה ש"מספרת" את הסיפור הזה:
+   • אפור-פחם כהה (#1f2933) כצבע ראשי = הבטון עצמו. משדר יציבות, מקצועיות ורצינות.
+   • ענבר/כתום חם (#f59e0b) כצבע הדגשה = צבע הבטיחות באתרי בנייה (אפודים, פיגומים),
+     ובנוסף משדר אנרגיה ודחיפות - בדיוק כמו אופי הזמן הקריטי של הבטון.
+   • רקעים אפורים בהירים מאוד (#f4f5f7) ולבן לכרטיסים = ניקיון, אווריריות ומראה מודרני.
+   • ירוק (#10b981) להצלחה, אדום (#ef4444) לשגיאה - צבעים אוניברסליים ומובנים מיד.
+   הצבעים הניטרליים האפורים (אפור = בטון) שולטים, וההדגשה הכתומה מופיעה רק
+   בנקודות הפעולה החשובות - כך העין מובלת בדיוק לאן שצריך, וזה נשאר נקי ואלגנטי.
+   ============================================================================ */
+
+:root {
+  /* ---- צבעי מותג (Brand) ---- */
+  --color-primary: #1f2933;          /* אפור-פחם כהה - הצבע הראשי (הבטון) */
+  --color-primary-soft: #323f4b;     /* גרסה מעט בהירה יותר למצבי hover */
+  --color-accent: #f59e0b;           /* ענבר חם - צבע ההדגשה והפעולה (בטיחות/דחיפות) */
+  --color-accent-dark: #d97706;      /* ענבר כהה יותר ל-hover על כפתורים */
+
+  /* ---- צבעים סמנטיים (משמעות) ---- */
+  --color-success: #10b981;          /* ירוק - הצלחה / אישור */
+  --color-success-bg: #ecfdf5;       /* רקע בהיר להודעת הצלחה */
+  --color-danger: #ef4444;           /* אדום - שגיאה / מחיקה */
+  --color-danger-bg: #fef2f2;        /* רקע בהיר להודעת שגיאה */
+  --color-info: #3b82f6;             /* כחול - מידע */
+  --color-info-bg: #eff6ff;          /* רקע בהיר להודעת מידע */
+
+  /* ---- צבעי רקע וטקסט (ניטרליים) ---- */
+  --color-bg: #f4f5f7;               /* רקע כללי של הדף - אפור בהיר מאוד */
+  --color-surface: #ffffff;          /* רקע כרטיסים וטפסים - לבן */
+  --color-border: #e4e7eb;           /* צבע גבולות עדינים */
+  --color-text: #1f2933;             /* צבע טקסט ראשי - כהה וקריא */
+  --color-text-muted: #616e7c;       /* טקסט משני / הסברים - אפור בינוני */
+  --color-text-light: #9aa5b1;       /* טקסט עמום מאוד (placeholder וכו') */
+
+  /* ---- טיפוגרפיה ---- */
+  --font-family: 'Heebo', 'Segoe UI', Tahoma, sans-serif; /* פונט עברי מודרני */
+
+  /* ---- מרווחים (Spacing scale) - שומר על אחידות בכל האתר ---- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  /* ---- פינות מעוגלות (Radius) ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;                 /* הרדיוס הסטנדרטי - מראה רך ומודרני */
+  --radius-lg: 20px;
+  --radius-full: 999px;              /* עיגול מלא (לתגיות / כפתורים עגולים) */
+
+  /* ---- צללים (Shadows) - יוצרים תחושת עומק עדינה ---- */
+  --shadow-sm: 0 1px 2px rgba(31, 41, 51, 0.06);
+  --shadow-md: 0 4px 16px rgba(31, 41, 51, 0.08);
+  --shadow-lg: 0 12px 32px rgba(31, 41, 51, 0.12);
+
+  /* ---- מעברים (Transitions) ---- */
+  --transition: 0.2s ease;
+}
+
+/* ---- איפוס בסיסי (Reset): מבטל מרווחי ברירת מחדל של הדפדפן ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;            /* רוחב כולל את ה-padding וה-border - נוח לחישוב */
+}
+
+html {
+  scroll-behavior: smooth;           /* גלילה חלקה כשמדלגים לעוגן */
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;                  /* ריווח שורות נוח לקריאה */
+  -webkit-font-smoothing: antialiased; /* החלקת גופן יפה יותר */
+  direction: rtl;                    /* כל האתר מימין לשמאל (עברית) */
+}
+
+/* ---- כותרות ---- */
+h1, h2, h3, h4 {
+  color: var(--color-primary);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+a {
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--color-accent); }
+
+/* ============================================================================
+   פריסה כללית (Layout)
+   ============================================================================ */
+
+/* מיכל מרכזי שמגביל את הרוחב כדי שהתוכן לא יימתח על מסכים רחבים */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;                    /* מרכוז אופקי */
+  padding: 0 var(--space-md);
+}
+
+/* אזור התוכן הראשי - דוחף את הפוטר לתחתית גם בדפים קצרים */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-main {
+  flex: 1;                           /* תופס את כל הגובה הפנוי */
+  padding: var(--space-xl) 0;
+}
+
+/* ============================================================================
+   סרגל ניווט עליון (Navbar)
+   ============================================================================ */
+.navbar {
+  background-color: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  position: sticky;                  /* נשאר למעלה בזמן גלילה */
+  top: 0;
+  z-index: 50;
+}
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #fff;
+}
+.navbar-brand:hover { color: var(--color-accent); }
+.navbar-logo {
+  width: 34px;
+  height: 34px;
+}
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  list-style: none;
+}
+.navbar-links a {
+  color: #cbd2d9;
+  font-weight: 500;
+  font-size: 0.97rem;
+}
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: var(--color-accent);
+}
+/* תצוגת המשתמש המחובר בסרגל */
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.navbar-user-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* ============================================================================
+   כפתורים (Buttons)
+   ============================================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 11px 22px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+/* כפתור ראשי - כתום, מושך את העין לפעולה החשובה */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-1px);       /* הרמה עדינה - תחושת אינטראקטיביות */
+  box-shadow: var(--shadow-md);
+}
+/* כפתור משני - כהה */
+.btn-secondary {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-primary-soft);
+  transform: translateY(-1px);
+}
+/* כפתור מתאר בלבד (Outline) - עדין */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-border);
+}
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent-dark);
+}
+.btn-block { width: 100%; }          /* כפתור ברוחב מלא */
+.btn-lg { padding: 14px 30px; font-size: 1.08rem; }
+
+/* ============================================================================
+   כרטיסים (Cards)
+   ============================================================================ */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xl);
+}
+.card-narrow {                       /* כרטיס צר - מתאים לטפסים (הרשמה/התחברות) */
+  max-width: 480px;
+  margin: 0 auto;
+}
+.card-header {
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+.card-title {
+  font-size: 1.6rem;
+  margin-bottom: var(--space-xs);
+}
+.card-subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.97rem;
+}
+
+/* ============================================================================
+   טפסים (Forms)
+   ============================================================================ */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+.form-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+.form-label .required {              /* כוכבית אדומה לשדה חובה */
+  color: var(--color-danger);
+  margin-inline-start: 2px;
+}
+.form-hint {                         /* הסבר קטן מתחת לשדה */
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: #fff;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-control::placeholder { color: var(--color-text-light); }
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);                 /* מסגרת כתומה במיקוד */
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);    /* הילה רכה */
+}
+.form-control.invalid {                              /* שדה עם שגיאת ולידציה */
+  border-color: var(--color-danger);
+}
+select.form-control { cursor: pointer; }
+textarea.form-control { resize: vertical; min-height: 90px; }
+
+/* שורת שדות זה לצד זה (למשל קו רוחב + קו אורך) */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.field-error {                       /* טקסט שגיאה מתחת לשדה */
+  color: var(--color-danger);
+  font-size: 0.82rem;
+  margin-top: var(--space-xs);
+}
+
+/* ============================================================================
+   הודעות / התראות (Alerts)
+   ============================================================================ */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-lg);
+  border: 1px solid transparent;
+}
+.alert-success { background: var(--color-success-bg); color: #047857; border-color: #a7f3d0; }
+.alert-danger  { background: var(--color-danger-bg);  color: #b91c1c; border-color: #fecaca; }
+.alert-info    { background: var(--color-info-bg);    color: #1d4ed8; border-color: #bfdbfe; }
+
+/* ============================================================================
+   רכיבי עזר נוספים
+   ============================================================================ */
+
+/* תגית קטנה (Badge) - למשל לציון "לקוח" / "קבלן" */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.badge-customer { background: var(--color-info-bg); color: var(--color-info); }
+.badge-contractor { background: #fff7ed; color: var(--color-accent-dark); }
+
+/* כותרת אזור (לדפים) */
+.page-title {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+.page-subtitle {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xl);
+}
+
+/* ספינר טעינה קטן בתוך כפתורים */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================================
+   דף הבית (Hero + כרטיסי בחירת מסלול)
+   ============================================================================ */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: var(--space-xl);
+}
+.hero h1 {
+  color: #fff;
+  font-size: 2.4rem;
+  margin-bottom: var(--space-md);
+}
+.hero .accent { color: var(--color-accent); }   /* הדגשת מילה בכתום */
+.hero p {
+  color: #cbd2d9;
+  font-size: 1.1rem;
+  max-width: 620px;
+  margin: 0 auto var(--space-lg);
+}
+.hero-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* רשת של כרטיסי בחירה (לקוח / קבלן) */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+}
+.choice-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+  transition: all var(--transition);
+  text-align: center;
+}
+.choice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-accent);
+}
+.choice-icon { font-size: 2.6rem; margin-bottom: var(--space-md); }
+.choice-card h3 { font-size: 1.3rem; margin-bottom: var(--space-sm); }
+.choice-card p { color: var(--color-text-muted); margin-bottom: var(--space-lg); }
+
+/* ============================================================================
+   פוטר (Footer)
+   ============================================================================ */
+.footer {
+  background: var(--color-primary);
+  color: #9aa5b1;
+  text-align: center;
+  padding: var(--space-lg) 0;
+  font-size: 0.9rem;
+}
+.footer a { color: var(--color-accent); }
+
+/* ============================================================================
+   רספונסיביות (מסכים קטנים / מובייל)
+   ============================================================================ */
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }   /* שדות זה מתחת לזה במובייל */
+  .hero h1 { font-size: 1.8rem; }
+  .navbar-links { gap: var(--space-md); }
+  .card { padding: var(--space-lg); }
+}
